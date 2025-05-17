@@ -1,5 +1,5 @@
 """
-URL configuration for vkrTest project.
+URL configuration for MWruler project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
@@ -22,6 +22,5 @@ from main import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', views.index, name='index'),
-    path('about/', views.about, name='about'),
+    path("", views.index, name="index"),
 ]
