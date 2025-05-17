@@ -198,15 +198,6 @@ body {
     word-wrap: break-word;
 }
 
-footer {
-    background-color: #f0f0f0;
-    padding: 15px 0;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    width: 100%;
-    color: #555;
-    border-top: 1px solid #ddd;
-}
 
 @media (max-width: 1200px){
     .nav-conteiner {
