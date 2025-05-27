@@ -6,5 +6,5 @@ def index(request) -> HttpResponse:
     return render(request, "main/index.html")
 
 
-def about(request) -> HttpResponse:
-    return HttpResponse("About page")
+def registration(request) -> HttpResponse:
+    return render(request, "accounts/reg/signup.html")

@@ -7,7 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{tittle}}</title>
         <link rel="stylesheet" href="{% static "main/styles/style.css" %}">
-        <link rel="stylesheet" href="{% static "main/styles/forheader.css" %}">
         {% block css%} 
         {% endblock css %}
     </head>
@@ -55,7 +54,7 @@
                 </div>
             </div>
         </header>
-        
+
         {% block content%}
         {% endblock  %}
         
