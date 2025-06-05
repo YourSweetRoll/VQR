@@ -7,14 +7,19 @@
         {% csrf_token %}
 
         {% comment %} Красивый вывод полей регистрации путём перебора {% endcomment %}
-        {% comment %} {% for f in form %}
+        <div class="form-error">
+            {{ form.non_field_errors }}
+        </div>
+        <div class="input-div">
+            {% for f in form %}
             <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
             <div class='form-error'>
                 {{ f.errors }}
             </div>       
-        {% endfor %} {% endcomment %}
+        {% endfor %}
+        </div>
 
-        {{ form.as_p }}
+
         <button type="submit">Авторизация</button>
     </form>
 {% endblock  %}

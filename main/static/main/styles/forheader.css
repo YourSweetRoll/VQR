@@ -71,3 +71,37 @@ body {
     border-radius: 50px;
     border-width: 0.5px;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.input-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Стили для меток и полей ввода */
+p.form-label {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px; /* Можно настроить по вашему усмотрению */
+    margin: 5px 0;
+}
+
+/* Стили для полей ввода */
+.form-input {
+    flex: 1;
+    margin-left: 10px; /* Отступ между меткой и полем ввода */
+}
+
+/* Стили для ошибок */
+.form-error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}

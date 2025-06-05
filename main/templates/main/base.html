@@ -39,7 +39,7 @@
                     </nav>
                 </div>
 
-                {% if user.is_authenticated %}  
+                {% if request.user.is_authenticated %}  
                     {% comment %} Содержимое для авторизованных пользователей  {% endcomment %}
                     <div class="userHeadForm">
                     <nav>
@@ -53,6 +53,10 @@
                             <li>
                                 <a href="/profile">Nickname</a>
                             </li>
+                            <li>
+                                
+                                <a href="{% url 'logout' %}">Выйти</a>
+                            </li>
                             <img src="{% static "main/images/Avatar1.jpg" %}" alt="UserAvatar" class="img-avatar">
                         </ul>
                     </nav>
@@ -63,7 +67,7 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="{% url "login" %}">Авторизация</a> |
+                                    <a href="{% url "login" %}">Авторизация</a>
                                 </li>
                                 <li>
                                     <a href="{% url "register" %}">Регистрация</a>
