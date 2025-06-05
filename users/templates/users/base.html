@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{tittle}}</title>
         <link rel="stylesheet" href="{% static "main/styles/style.css" %}">
+        <link rel="stylesheet" href="{% static "main/styles/forheader.css" %}">
         {% block css%} 
         {% endblock css %}
     </head>
@@ -23,13 +24,13 @@
                                 <a href="{% url "index" %}">Главная</a>
                             </li>
                             <li>
-                                <a href="">Новости</a>
+                                <a href="/news">Новости</a>
                             </li>
                             <li>
-                                <a href="">О нас</a>
+                                <a href="{% url 'about' %}">О нас</a>
                             </li>
                             <li>
-                                <a href="">Каталог</a>
+                                <a href="/catalog">Каталог</a>
                             </li>
                             <li>
                                 <input type="text" placeholder="Поиск" style="height: 28px; padding-left: 3px;">
@@ -37,11 +38,12 @@
                         </ul>
                     </nav>
                 </div>
-    
-                <div>
+
+                {% if request.user.is_authenticated %}  
+                    {% comment %} Содержимое для авторизованных пользователей  {% endcomment %}
+                    <div class="userHeadForm">
                     <nav>
                         <ul>
-                            
                             <li>
                                 <a href="#">Уведомления</a>
                             </li>
@@ -49,15 +51,37 @@
                                 <a href="#">Сообщения</a>
                             </li>
                             <li>
-                                <a href="#">Nickname</a>
+                                <a href="/profile">Nickname</a>
+                            </li>
+                            <li>
+                                
+                                <a href="{% url 'logout' %}">Выйти</a>
                             </li>
                             <img src="{% static "main/images/Avatar1.jpg" %}" alt="UserAvatar" class="img-avatar">
                         </ul>
                     </nav>
-                </div>
+                </div> 
+                {% else %}  
+                    {% comment %} Содержимое для неаутентифицированных пользователей {% endcomment %}
+                    <div class="userHeadForm">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="{% url "login" %}">Авторизация</a>
+                                </li>
+                                <li>
+                                    <a href="{% url "register" %}">Регистрация</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>  
+                {% endif %}  
+
+
+
             </div>
         </header>
-
+        
         {% block content%}
         {% endblock  %}
         
