@@ -1,0 +1,95 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{tittle}}</title>
+        <link rel="stylesheet" href="{% static "main/styles/style.css" %}">
+        <link rel="stylesheet" href="{% static "main/styles/forheader.css" %}">            
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+        {% block css%} 
+        {% endblock css %}
+    </head>
+
+
+    <body>
+        <header class="top-conteiner">
+            <div class="nav-conteiner">
+                <div>
+                    <nav>
+                        <ul>
+                            <img src="{% static "main/images/Logo1.png" %}" alt="Logo" class="img-logo">
+                            <li>
+                                <a href="{% url "index" %}">Главная</a>
+                            </li>
+                            <li>
+                                <a href="/news">Новости</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'about' %}">О нас</a>
+                            </li>
+                            <li>
+                                <a href="/catalog">Каталог</a>
+                            </li>
+                            <li>
+                                <input type="text" placeholder="Поиск" style="height: 28px; padding-left: 3px;">
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                {% if request.user.is_authenticated %}  
+                    {% comment %} Содержимое для авторизованных пользователей  {% endcomment %}
+                    <div class="userHeadForm">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="#">Уведомления</a>
+                            </li>
+                            <li>
+                                <a href="#">Сообщения</a>
+                            </li>
+                            <li>
+                                <a href="users/profile">{{ user.get_username }}</a>
+                            </li>
+                            <li>
+                                
+                                <a href="{% url 'logout' %}">Выйти</a>
+                            </li>
+                            <img src="{{ user.profile.image.url }}" alt="UserAvatar" class="img-avatar">
+                        </ul>
+                    </nav>
+                </div> 
+                {% else %}  
+                    {% comment %} Содержимое для неаутентифицированных пользователей {% endcomment %}
+                    <div class="userHeadForm">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="{% url "login" %}">Авторизация</a>
+                                </li>
+                                <li>
+                                    <a href="{% url "register" %}">Регистрация</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>  
+                {% endif %}  
+
+
+
+            </div>
+        </header>
+        
+        {% block content%}
+        {% endblock  %}
+        
+        {% block footer%}       
+        {% endblock %}
+    </body>
+</html>

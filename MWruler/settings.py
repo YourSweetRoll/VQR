@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "users",
     'crispy_forms',
     'crispy_bootstrap4',
+    'books',
     # 'accounts.apps.AccountsConfig',
 ]
 
