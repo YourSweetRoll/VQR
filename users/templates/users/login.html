@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+{% extends "users/base.html" %}
 
 {% block content %}
     <h1> {{title}} </h1>
@@ -6,7 +6,8 @@
     <form method="post">
         {% csrf_token %}
 
-        {% comment %} Красивый вывод полей регистрации путём перебора {% endcomment %}
+        {% comment %} Эстетичный вывод полей регистрации путём перебора {% endcomment %}
+
         <div class="form-error">
             {{ form.non_field_errors }}
         </div>

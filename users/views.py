@@ -1,16 +1,17 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse_lazy
 from users.forms import RegisterUserForm
 from users.forms import LoginUserForm
 from django.contrib.auth.views import LoginView
-# from django.contrib.auth.forms import AuthenticationForm
 from main.utils import DataMixin
 from django.contrib.auth import logout
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+
+from users.models import Profile
 
 
 def index(request) -> HttpResponse:
@@ -49,7 +50,7 @@ class LoginUser(DataMixin, LoginView):
     
     def get_success_url(self):
         return reverse_lazy("index")
-    # В settings.py указан параметр LOGIN_REDIRECT_URL = 'index' в таком случае в данной функции нет нужды
+    # Если settings.py указан параметр LOGIN_REDIRECT_URL = 'index' в таком случае в данной функции нет нужды
 
 
 def LogoutUser(request):
@@ -77,12 +78,14 @@ def register(request):
 
 
 @login_required
-def profile(request):
+def profile_view(request, profile_id):
+    get_object_or_404(Profile, profile_id=profile_id)
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES,instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
+        # if p_form.is_valid():
+            # u_form.save()
             p_form.save()
             messages.success(request, f'Ваш профиль успешно обновлен.')
             return redirect('profile')
@@ -96,7 +99,7 @@ def profile(request):
         'p_form': p_form
     }
 
-    return render(request, 'users/profile.html', context)
+    return render(request,'users/profile.html', context)
 
 
 
