@@ -79,13 +79,13 @@ def register(request):
 
 @login_required
 def profile_view(request, profile_id):
-    get_object_or_404(Profile, profile_id=profile_id)
+    profile = get_object_or_404(Profile, profile_id=profile_id)
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES,instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
         # if p_form.is_valid():
-            # u_form.save()
+            u_form.save()
             p_form.save()
             messages.success(request, f'Ваш профиль успешно обновлен.')
             return redirect('profile')
@@ -96,7 +96,8 @@ def profile_view(request, profile_id):
 
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'profile': profile
     }
 
     return render(request,'users/profile.html', context)
