@@ -12,7 +12,18 @@ def book_detail(request, book_id):
 
 def chapter_detail(request, book_id, chapter_id):
     chapter = get_object_or_404(Chapter, id=chapter_id, book_id=book_id)
-    return render(request, 'books/chapter_detail.html', {'chapter': chapter})
+    chapters = Chapter.objects.filter(book_id=book_id).order_by('id')
+    chapter_list = list(chapters)
+    current_index = chapter_list.index(chapter)
+
+    next_chapter = chapter_list[current_index + 1] if current_index < len(chapter_list) - 1 else None
+    previous_chapter = chapter_list[current_index - 1] if current_index > 0 else None
+
+    return render(request, 'books/chapter_detail.html', {
+        'chapter': chapter,
+        'next_chapter': next_chapter,
+        'previous_chapter': previous_chapter
+    })
 
 def create_book(request):
     if request.method == 'POST':

@@ -3,4 +3,14 @@
 {% block content %}
     <h1>{{ chapter.title }}</h1>
     <p>{{ chapter.content }}</p>
+
+    <div>
+        {% if previous_chapter %}
+            <a href="{% url 'chapter_detail' chapter.book.id previous_chapter.id %}"><button>Previous Chapter</button></a>
+        {% endif %}
+        <a href="{% url 'book_detail' chapter.book.id %}"><button>Back to Book</button></a>
+        {% if next_chapter %}
+            <a href="{% url 'chapter_detail' chapter.book.id next_chapter.id %}"><button>Next Chapter</button></a>
+        {% endif %}
+    </div>
 {% endblock  %}
