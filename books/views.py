@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book, Chapter
-from .forms import BookForm
+from .forms import BookForm, ChapterForm
 
 def book_list(request):
     books = Book.objects.all()
@@ -25,3 +25,16 @@ def create_book(request):
     else:
         form = BookForm()
     return render(request, 'books/create_book.html', {'form': form})
+
+def create_chapter(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == 'POST':
+        form = ChapterForm(request.POST)
+        if form.is_valid():
+            chapter = form.save(commit=False)
+            chapter.book = book
+            chapter.save()
+            return redirect('book_detail', book_id=book.id)
+    else:
+        form = ChapterForm()
+    return render(request, 'books/create_chapter.html', {'form': form, 'book': book})

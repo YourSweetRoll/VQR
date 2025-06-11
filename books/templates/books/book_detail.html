@@ -2,6 +2,9 @@
 
 {% block content %}
     <h1>{{ book.title }}</h1>
+    {% if book.cover %}
+        <img src="/media/{{book.cover}}" alt="{{ book.title }} cover" style="max-width: 200px;">
+    {% endif %}
     <p>Author: {{ book.author }}</p>
     <p>Description: {{ book.description }}</p>
     <h2>Chapters</h2>
@@ -10,4 +13,5 @@
             <li><a href="{% url 'chapter_detail' book.id chapter.id %}">{{ chapter.title }}</a></li>
         {% endfor %}
     </ul>
+    <a href="{% url 'create_chapter' book.id %}"><button>Create Chapter</button></a>
 {% endblock  %}
