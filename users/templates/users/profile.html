@@ -44,7 +44,7 @@
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Ваш профиль</legend>
-            {% comment %} {{ u_form|crispy }} {% endcomment %}
+            {{ u_form|crispy }}
             {{ p_form|crispy }}
         </fieldset>
         <div class="form-group">
