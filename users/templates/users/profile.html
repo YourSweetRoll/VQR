@@ -9,6 +9,40 @@
 {% endblock %}
 
 {% block content %}
+    <div class="content-section" style="padding-top:3%">
+  	    <div class="media">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+    	    </div>
+  	    </div>
+  	<!-- Здесь будет форма -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Ваш профиль</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Обновить</button>
+            </div>
+        </form>
+	</div>
+{% endblock %}
+
+{% block footer%}       
+    <footer>
+        <div>
+            <a>Copyright &copy; 2025</a>
+        </div> 
+    </footer>
+{% endblock %}
+
+
+
+
     {% comment %} <div class="main-profile-block">
         <div class="head-profile-block">
             <p>{{ profile.user.username }}</p>
@@ -31,35 +65,3 @@
             </div>
         </div>
     </div> {% endcomment %}
-    <div class="content-section" style="padding-top:3%">
-  	    <div class="media">
-            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-            <div class="media-body">
-                <h2 class="account-heading">{{ user.username }}</h2>
-                <p class="text-secondary">{{ user.email }}</p>
-    	    </div>
-  	    </div>
-  	<!-- Здесь будет форма -->
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Ваш профиль</legend>
-            {{ u_form|crispy }}
-            {{ p_form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Обновить</button>
-        </div>
-    </form>
-
-	</div>
-
-{% endblock %}
-
-{% block footer%}       
-    <footer>
-        <div>
-            <a>Copyright &copy; 2025</a>
-        </div> 
-    </footer>
-{% endblock %}
